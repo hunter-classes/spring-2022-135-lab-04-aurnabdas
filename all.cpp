@@ -5,17 +5,11 @@
 
 
 
-std::string result_box;
-std::string result_checker;
-std::string result_cross;
-std::string result_lower;
-std::string result_upper;
-std::string result_triangle;
-
 
 
 std::string box(int width,int height)
 {
+    std::string result_box = "";
     for(int i = 0; i <= height-1; i++)
     {
         for(int j = 0; j <= width-1; j++)
@@ -30,6 +24,7 @@ std::string box(int width,int height)
 
 std::string checkerboard(int width, int height)
 {
+    std::string result_checker = "";
     for(int i = 0; i < height; i++)
     {
         for(int j = 0; j < width; j++)
@@ -58,6 +53,7 @@ std::string checkerboard(int width, int height)
 
 std::string cross(int size)
 {
+    std::string result_cross = "";
     for(int i = 0; i < size; i++)
     {
         for(int j = 0; j < size; j++)
@@ -84,6 +80,7 @@ std::string cross(int size)
 
 std::string lower(int length)
 {
+    std::string result_lower = "";
     for(int i = 0; i < length; i++)
     {
         for(int j = 0; j <= i; j++)
@@ -97,6 +94,7 @@ std::string lower(int length)
 }
 std::string upper(int length)
 {
+    std::string result_upper = "";
     for(int i = length; i > 0; --i)
     {
         for(int j = 0; j < i; j++)
@@ -113,6 +111,7 @@ std::string upper(int length)
 
 std::string triangle(int width, int height)
 {
+    std::string result_triangle = "";
     int space = 0;
     int stars = width;
 
@@ -143,6 +142,80 @@ if(width / 2 >= height || (width + 1) / 2 >= height)
 
     return result_triangle;
 }
+
+std::string checkerboard3x3(int width,int height)
+{
+    std::string result_checkerboard3x3 = "";
+    bool star = true;
+    bool space = false;
+    int star_count = 0;
+    int space_count = 0;
+
+    bool line = true; 
+    int line_count = 0; 
+
+    for(int i = 0; i < height; i++)  {
+        line_count++;
+
+        for(int j = 0; j < width; j++) 
+        { 
+            if(star_count == 3)
+            { 
+                star = !star;
+                space = !space; 
+                star_count = 0; 
+            }
+
+            if(space_count == 3) 
+            { 
+                star = !star; 
+                space = !space; 
+                space_count = 0; 
+            }
+
+            if(star) 
+            { 
+                result_checkerboard3x3 += "*";
+                star_count++;
+            }
+            
+            if(space) 
+            { 
+                result_checkerboard3x3 += " ";
+                space_count++;
+            }
+        }
+
+        if(line_count > 5) 
+        { 
+            line = true; 
+            line_count = 0; 
+        }
+
+        if(line_count < 3 && line) 
+        { 
+            star = true;
+            space = false;
+            if(line_count == 3) 
+            { 
+                line = !line; 
+            }
+        } 
+        else 
+        { 
+            star = false;
+            space = true;
+        }
+
+        result_checkerboard3x3 += "\n"; 
+        space_count = 0; 
+        star_count = 0;               
+    }
+
+
+    return result_checkerboard3x3;
+}
+
 
 
 
